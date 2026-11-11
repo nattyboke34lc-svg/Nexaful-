@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f8ff">
+  <title>FRAMEFLOW | AI Film Studio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="FRAMEFLOW home"><span class="brand-mark">F</span><span>FRAMEFLOW<small>YOUR AI FILM STUDIO</small></span></a>
+      <div class="workspace-label">WORKSPACE</div>
+      <button class="nav-item active" data-panel="story"><span>✳</span> Story Lab</button>
+      <button class="nav-item" data-panel="characters"><span>◉</span> Character Studio</button>
+      <button class="nav-item" data-panel="storyboard"><span>▦</span> Storyboard</button>
+      <button class="nav-item" data-panel="production"><span>▶</span> Production</button>
+      <div class="sidebar-bottom">
+        <div class="privacy-note"><span class="privacy-dot"></span><div><b>Local workspace</b><small>Your project stays in this browser.</small></div></div>
+        <button id="exportProject" class="quiet-button">↗ Export project backup</button>
+        <label class="quiet-button import-label">↙ Import project backup<input id="importProject" type="file" accept=".json,application/json" hidden></label>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div><div class="eyebrow">PRODUCTION WORKSPACE / <span id="currentSection">STORY LAB</span></div><h1 id="pageTitle">Bring the screenplay to life.</h1></div>
+        <div class="top-actions"><span class="status-chip"><i></i> LOCAL PROJECT</span><button id="resetProject" class="icon-button" title="Start a new project">＋</button></div>
+      </header>
+
+      <section class="panel active" id="panel-story">
+        <div class="hero-card">
+          <div class="hero-copy"><span class="kicker">FROM SCRIPT TO SCREEN</span><h2>A film begins with<br><em>a point of view.</em></h2><p>Upload a screenplay. FRAMEFLOW will map its scenes, identify its cast and prepare a storyboard for your approval.</p></div>
+          <div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="lens"><span>F</span></div><div class="spark spark-one"></div><div class="spark spark-two"></div></div>
+        </div>
+        <div class="section-heading"><div><span class="kicker">01 / SCREENPLAY PROCESSING</span><h2>Start with your story</h2><p>TXT and Markdown files are supported. You can also paste screenplay text below.</p></div><span class="step-count">STEP 1 OF 4</span></div>
+        <div class="upload-card">
+          <div class="upload-icon">↑</div><div><b>Drop your screenplay here</b><p>or choose a file from this device · .txt, .md</p></div>
+          <label class="primary-button">Choose screenplay<input id="scriptFile" type="file" accept=".txt,.md,.fountain,text/plain,text/markdown" hidden></label>
+        </div>
+        <div class="editor-card"><div class="editor-head"><b>Screenplay text</b><span id="wordCount">0 words</span></div><textarea id="scriptText" placeholder="Paste your screenplay here...&#10;&#10;INT. HANGAR - NIGHT&#10;MARA checks the aircraft..."></textarea><div class="editor-foot"><input id="projectName" value="THE LAST FLIGHT" aria-label="Project name"><button id="processScript" class="primary-button">Process screenplay <span>→</span></button></div></div>
+        <div id="processingMessage" class="inline-message" role="status"></div>
+        <div class="section-heading compact"><div><span class="kicker">YOUR PROJECT</span><h2>Production snapshot</h2></div></div>
+        <div class="stats-grid"><div class="stat-card"><small>SCENES FOUND</small><strong id="sceneStat">0</strong></div><div class="stat-card"><small>CHARACTERS FOUND</small><strong id="characterStat">0</strong></div><div class="stat-card"><small>STORYBOARD SHOTS</small><strong id="shotStat">0</strong></div><div class="stat-card"><small>APPROVED SHOTS</small><strong id="approvedStat">0</strong></div></div>
+      </section>
+
+      <section class="panel" id="panel-characters">
+        <div class="section-heading"><div><span class="kicker">02 / CHARACTER CONTINUITY</span><h2>Keep every character recognizable.</h2><p>These are editable continuity records, not AI-generated identity guarantees.</p></div></div>
+        <div id="characterList" class="character-grid empty-state">Process a screenplay to identify its characters. You can then define their appearance, wardrobe and continuity rules.</div>
+        <div class="callout"><b>Continuity rule</b><p>Approve one canonical reference image per character before generating footage. Reuse that reference and the same written description for every shot. This studio stores the rules; it does not yet generate or verify video identity.</p></div>
+      </section>
+
+      <section class="panel" id="panel-storyboard">
+        <div class="section-heading"><div><span class="kicker">03 / DIRECTOR'S STORYBOARD</span><h2>Every shot has a purpose.</h2><p>Review and edit the shot plan. Nothing enters production until you approve it.</p></div><button id="approveAll" class="secondary-button">Approve all shots</button></div>
+        <div id="storyboardList" class="shot-list empty-state">Your storyboard will appear here after screenplay processing.</div>
+      </section>
+
+      <section class="panel" id="panel-production">
+        <div class="section-heading"><div><span class="kicker">04 / VIDEO PRODUCTION</span><h2>From approved shot to footage.</h2><p>Track generated clips and attach preview footage to each shot.</p></div><span class="status-chip warning">PROVIDER NOT CONNECTED</span></div>
+        <div class="production-warning"><b>Generation is not connected yet.</b><p>This workspace does not currently have a video provider API or rendering backend. It will not pretend to generate footage. You can organize approved shots and attach clips generated elsewhere. A secure server-side provider connection is the next integration milestone.</p></div>
+        <div id="productionList" class="shot-list empty-state">Approve storyboard shots to prepare the production queue.</div>
+        <div class="callout"><b>Cost protection</b><p>No paid API calls are made by this version. Never paste provider API keys into this page or into GitHub.</p></div>
+      </section>
+
+      <footer><span>FRAMEFLOW <b>V1 · LOCAL-FIRST BUILD</b></span><span>Story first. Continuity always.</span></footer>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
